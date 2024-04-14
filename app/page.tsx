@@ -33,7 +33,7 @@ export default function Home() {
   }, [textAreaValue]);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleClick3();
+    await handleClick3();
     if (e.target.files && e.target.files.length > 0) {
       const filesArray = Array.from(e.target.files); // Transformă lista de fișiere într-un array
       const newFiles = filesArray.map((file) => file.name); // Obținem numele fișierelor încărcate
@@ -104,7 +104,7 @@ export default function Home() {
     const response2 = await Axios.post("http://localhost:3000/intrebare", {
       content: allText + " Intrebarea " + q,
     });
-    setTextAreaValue(textAreaValue + "\n" + q + "\n" + response2.data + "\n");
+    setTextAreaValue(textAreaValue + "\n" + "\u{1F601} " + q + "\n\n" + "\u{1F916} " + response2.data + "\n\n");
     setQ("");
   };
 
@@ -114,8 +114,8 @@ export default function Home() {
       idc: ConvId,
     });
     const allText = response.data
-      .map((item: { name: any }) => item.name + "\n")
-      .join(" ");
+      .map((item: { name: any }) => item.name + "\n\n")
+      .join("");
     setFileList(allText + "\n");
     setQ("");
   };
@@ -131,7 +131,7 @@ export default function Home() {
     const response2 = await Axios.post("http://localhost:3000/test", {
       content: allText,
     });
-    setTextAreaValue(textAreaValue + "\n" + response2.data + "\n");
+    setTextAreaValue(textAreaValue + "\n" + "\u{1F916} " + response2.data + "\n");
   };
 
   const handleClickMakeSummary = async () => {
@@ -145,7 +145,7 @@ export default function Home() {
     const response2 = await Axios.post("http://localhost:3000/rezumat", {
       content: allText,
     });
-    setTextAreaValue(textAreaValue + "\n" + response2.data + "\n");
+    setTextAreaValue(textAreaValue + "\n" + "\u{1F916} " + response2.data + "\n");
   };
 
   const handleClick = () => {
@@ -169,11 +169,12 @@ export default function Home() {
       { id: Math.random(), content: "New Chat" },
     ]);
   };
+
   const handleChatClick = (chatId: number) => {
     // Implement logic to open the chat window for the clicked chat (e.g., using a modal)
     console.log(`Opening chat with ID: ${chatId}`);
   };
-  const buttonRef = useRef<HTMLButtonElement>(null);
+
   return (
     // PAGINA PRINCIPALA
     <div

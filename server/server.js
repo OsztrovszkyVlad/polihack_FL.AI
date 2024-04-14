@@ -64,7 +64,7 @@ app.get("/getConv",async (req,res)=>{
 
 app.post("/intrebare", async (req, res) => {
     async function main() {
-        const content = "Salut foloseste doar informatiile din acest text si incearca sa raspunzi te rog la intrebare,daca informatiile date nu sunt de ajuns spune ,nu spune chestii care nu sunt date in fisier "+req.body.content; 
+        const content = "Salut foloseste doar informatiile din acest text si incearca te rog sa raspunzi la intrebare, doar daca informatiile se gasescin textul dat. Daca nu gasesti raspunsul la intrebare, spune ca nu ai informatiile necesare sa raspunzi la aceasta intrebare."+req.body.content; 
         const completion = await openai.chat.completions.create({
           messages: [{ role: "user", content: content}],
           model: "gpt-3.5-turbo-0125",
@@ -73,6 +73,8 @@ app.post("/intrebare", async (req, res) => {
       }
     main();
 })
+
+
 
 app.post("/test", async (req, res) => {
     
