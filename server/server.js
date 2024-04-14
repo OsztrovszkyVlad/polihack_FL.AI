@@ -66,10 +66,11 @@ app.get("/getConv", async (req, res) => {
 // app.post("/intrebare", async (req, res) => {
 //   async function main() {
 //     const content =
-//       "Salut foloseste doar informatiile din acest text si incearca te rog sa raspunzi la intrebare, doar daca informatiile se gasesc in textul dat. Daca nu gasesti raspunsul la intrebare, spune ca nu ai informatiile necesare sa raspunzi la aceasta intrebare." +
+//       "Foloseste doar informatiile din acest text pentru a raspunde la intrebare si daca nu ai destula informatie spune ca nu stii." +
 //       req.body.content;
 //     const completion = await openai.chat.completions.create({
-//       messages: [{ role: "user", content: content }],
+//       messages: [{ role: "user", content: content }
+//     ],
 //       model: "gpt-3.5-turbo-0125",
 //     });
 //     res.json(completion.choices[0].message.content);
@@ -79,7 +80,7 @@ app.get("/getConv", async (req, res) => {
 
 app.post("/intrebare", async (req, res) => {
   async function main() {
-      const content ="Salut foloseste doar informatiile din acest text si incearca te rog sa raspunzi la intrebare doar daca informatiile se gasesc in textul dat. Daca nu gasesti raspunsul la intrebare, spune ca nu ai informatiile necesare sa raspunzi la aceasta intrebare." +req.body.content;  
+      const content ="Salut foloseste doar informatiile din acest text si incearca te rog sa raspunzi la intrebare, doar daca informatiile se gasesc in textul dat. Daca nu gasesti raspunsul la intrebare spune ca nu ai informatiile necesare sa raspunzi la aceasta intrebare." +req.body.content;  
       const maxChunkLength = 3000; // Lungimea maximă a bucăților de text
       const chunks = [];
       // Împarte conținutul în bucăți de maxim maxChunkLength caractere
@@ -114,7 +115,7 @@ app.post("/test", async (req, res) => {
       {
         role: "system",
         content:
-          "Genereaza  intrebari cu 4 raspunsuri si raspunul corect dar nu il zi doar dupa ce utilizatorul raspunde",
+          "Genereaza intrebari cu 4 raspunsuri si raspunul corect dar nu il zici doar dupa ce utilizatorul raspunde.",
       },
     ],
     model: "gpt-3.5-turbo-0125",

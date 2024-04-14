@@ -21,7 +21,7 @@ export default function Home() {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [fileContent, setFileContent] = useState("");
   const [fileName, setFileName] = useState<string>("");
-  const [textAreaValue, setTextAreaValue] = useState(""); // Create a state variable for the textarea value
+  const [textAreaValue, setTextAreaValue] = useState("\u{1F916} " + "Salut! Eu sunt FL.AI! Cu ce te pot ajuta?\n"); // Create a state variable for the textarea value
   const [fileList, setFileList] = useState<string>();
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const textAreaRef1 = useRef<HTMLTextAreaElement>(null);
@@ -140,7 +140,7 @@ export default function Home() {
       content: allText,
     });
     setTextAreaValue(
-      textAreaValue + "\n" + "\u{1F916} " + response2.data + "\n"
+      textAreaValue + "\n" + "\n" + "\u{1F601} " + "Genereaza-mi intrebari.\n\n" + "\u{1F916} " + response2.data + "\n"
     );
   };
 
@@ -156,7 +156,7 @@ export default function Home() {
       content: allText,
     });
     setTextAreaValue(
-      textAreaValue + "\n" + "\u{1F916} " + response2.data + "\n"
+      textAreaValue + "\n" + "\u{1F601} " + "Fa-mi rezumatul.\n\n" + "\u{1F916} " + response2.data + "\n"
     );
   };
 
