@@ -104,10 +104,18 @@ export default function Home() {
     const response2 = await Axios.post("http://localhost:3000/intrebare", {
       content: allText + " Intrebarea " + q,
     });
-    setTextAreaValue(textAreaValue + "\n" + "\u{1F601} " + q + "\n\n" + "\u{1F916} " + response2.data + "\n\n");
+    setTextAreaValue(
+      textAreaValue +
+        "\n" +
+        "\u{1F601} " +
+        q +
+        "\n\n" +
+        "\u{1F916} " +
+        response2.data +
+        "\n\n"
+    );
     setQ("");
   };
-
 
   const handleClick4 = async () => {
     const response = await Axios.post("http://localhost:3000/getFileName", {
@@ -131,7 +139,9 @@ export default function Home() {
     const response2 = await Axios.post("http://localhost:3000/test", {
       content: allText,
     });
-    setTextAreaValue(textAreaValue + "\n" + "\u{1F916} " + response2.data + "\n");
+    setTextAreaValue(
+      textAreaValue + "\n" + "\u{1F916} " + response2.data + "\n"
+    );
   };
 
   const handleClickMakeSummary = async () => {
@@ -145,7 +155,9 @@ export default function Home() {
     const response2 = await Axios.post("http://localhost:3000/rezumat", {
       content: allText,
     });
-    setTextAreaValue(textAreaValue + "\n" + "\u{1F916} " + response2.data + "\n");
+    setTextAreaValue(
+      textAreaValue + "\n" + "\u{1F916} " + response2.data + "\n"
+    );
   };
 
   const handleClick = () => {
