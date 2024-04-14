@@ -63,19 +63,46 @@ app.get("/getConv", async (req, res) => {
   }
 });
 
+// app.post("/intrebare", async (req, res) => {
+//   async function main() {
+//     const content =
+//       "Salut foloseste doar informatiile din acest text si incearca te rog sa raspunzi la intrebare, doar daca informatiile se gasesc in textul dat. Daca nu gasesti raspunsul la intrebare, spune ca nu ai informatiile necesare sa raspunzi la aceasta intrebare." +
+//       req.body.content;
+//     const completion = await openai.chat.completions.create({
+//       messages: [{ role: "user", content: content }],
+//       model: "gpt-3.5-turbo-0125",
+//     });
+//     res.json(completion.choices[0].message.content);
+//   }
+//   main();
+// });
+
 app.post("/intrebare", async (req, res) => {
   async function main() {
-    const content =
-      "Salut foloseste doar informatiile din acest text si incearca te rog sa raspunzi la intrebare, doar daca informatiile se gasesc in textul dat. Daca nu gasesti raspunsul la intrebare, spune ca nu ai informatiile necesare sa raspunzi la aceasta intrebare." +
-      req.body.content;
-    const completion = await openai.chat.completions.create({
-      messages: [{ role: "user", content: content }],
-      model: "gpt-3.5-turbo-0125",
-    });
-    res.json(completion.choices[0].message.content);
-  }
+      const content ="Salut foloseste doar informatiile din acest text si incearca te rog sa raspunzi la intrebare doar daca informatiile se gasesc in textul dat. Daca nu gasesti raspunsul la intrebare, spune ca nu ai informatiile necesare sa raspunzi la aceasta intrebare." +req.body.content;  
+      const maxChunkLength = 3000; // Lungimea maximă a bucăților de text
+      const chunks = [];
+      // Împarte conținutul în bucăți de maxim maxChunkLength caractere
+      for (let i = 0; i < content.length; i += maxChunkLength) {
+          chunks.push(content.substring(i, i + maxChunkLength));
+      }
+      const completions = [];
+      // Pentru fiecare bucată de text, apelează API-ul OpenAI pentru completare și așteaptă răspunsul
+      for (const chunk of chunks) {
+          const completion = await openai.chat.completions.create({
+              messages: [{ role: "user", content: chunk }],
+              model: "gpt-3.5-turbo-0125",
+          });
+          completions.push(completion.choices[0].message.content);
+      }
+      // Concatenează toate răspunsurile
+      const finalResponse = completions.join(" ");
+      // Trimite înapoi răspunsul final
+      console.log(finalResponse);
+      res.json(finalResponse);
+    }
   main();
-});
+})
 
 app.post("/test", async (req, res) => {
   const content =
